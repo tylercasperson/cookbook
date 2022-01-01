@@ -78,4 +78,19 @@ const updateRecipe = asyncHandler(async (req, res) => {
   }
 });
 
-export { getRecipes, getOneRecipe, createRecipe, updateRecipe };
+// @desc    Delete a recipe
+// @route   DELETE /api/recipe/:id
+// @access  Private/Admin
+const deleteRecipe = asyncHandler(async (req, res) => {
+  const recipe = await Recipe.findById(req.params.id);
+
+  if (recipe) {
+    await recipe.remove();
+    res.json({ message: 'Recipe removed.' });
+  } else {
+    res.status(404);
+    throw new Error('Recipe not found');
+  }
+});
+
+export { getRecipes, getOneRecipe, createRecipe, updateRecipe, deleteRecipe };
