@@ -15,15 +15,11 @@ const recipeSchema = mongoose.Schema(
         unitOfMeasure: { type: mongoose.Schema.Types.ObjectId, ref: 'UnitOfMeasure' },
       },
     ],
-    toolsNeeded: [
-      {
-        tool: { type: String },
-      },
-    ],
+    toolsNeeded: { type: Array },
     instructions: [
       {
-        step: { type: Number },
-        task: { type: String },
+        title: { type: String },
+        group: { type: Array },
       },
     ],
   },
