@@ -10,4 +10,18 @@ const getUnitOfMeasure = asyncHandler(async (req, res) => {
   res.json({ unitOfMeasure });
 });
 
-export { getUnitOfMeasure };
+// @desc    Fetch one unitsOfMeasure
+// @route   GET /api/unitOfMeasure/:name
+// @access  Public
+const findByNameUnitOfMeasure = asyncHandler(async (req, res) => {
+  const unitOfMeasure = await UnitOfMeasure.findOne({ name: req.params.name });
+
+  if (unitOfMeasure) {
+    res.json(unitOfMeasure);
+  } else {
+    res.status(404);
+    throw new Error('Unit of measure not found');
+  }
+});
+
+export { getUnitOfMeasure, findByNameUnitOfMeasure };
