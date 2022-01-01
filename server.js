@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 
+import unitOfMeasureRoutes from './routes/unitOfMeasureRoutes.js';
+
 dotenv.config();
 
 connectDB();
@@ -18,6 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 
 // routes
+app.use('/api/unitOfMeasure', unitOfMeasureRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));
