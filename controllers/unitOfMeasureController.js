@@ -24,4 +24,26 @@ const findByNameUnitOfMeasure = asyncHandler(async (req, res) => {
   }
 });
 
-export { getUnitOfMeasure, findByNameUnitOfMeasure };
+// @desc    Create a unitOfMeasure
+// @route   POST /api/unitOfMeasure
+// @access  Private/Admin
+const createUnitOfMeasure = asyncHandler(async (req, res) => {
+  const unitOfMeasure = new UnitOfMeasure({
+    name: 'Sample Name',
+    abbreviation: 'a',
+    gallon: 0,
+    liters: 0,
+    milliliters: 0,
+    pint: 0,
+    quart: 0,
+    cup: 0,
+    fluidOz: 0,
+    tablespoon: 0,
+    teaspoon: 0,
+  });
+
+  const createdUnitOfMeasure = await unitOfMeasure.save();
+  res.status(201).json(createdUnitOfMeasure);
+});
+
+export { getUnitOfMeasure, findByNameUnitOfMeasure, createUnitOfMeasure };
