@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 
 import unitOfMeasureRoutes from './routes/unitOfMeasureRoutes.js';
-import ingredientRoutes from './routes/ingredientRoutes.js';
+import recipeRoutes from './routes/recipeRoutes.js';
 
 dotenv.config();
 
@@ -20,9 +20,8 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 
-// routes
 app.use('/api/unitOfMeasure', unitOfMeasureRoutes);
-app.use('/api/ingredient', ingredientRoutes);
+app.use('/api/recipe', recipeRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));

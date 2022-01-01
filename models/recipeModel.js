@@ -7,10 +7,12 @@ const recipeSchema = mongoose.Schema(
       required: true,
     },
     description: { type: String },
+    category: { type: String },
     ingredients: [
       {
-        ingredient: { type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' },
-        unitOfMeasure: { type: String },
+        ingredient: { type: String },
+        quantity: { type: Number },
+        unitOfMeasure: { type: mongoose.Schema.Types.ObjectId, ref: 'UnitOfMeasure' },
       },
     ],
     toolsNeeded: [
