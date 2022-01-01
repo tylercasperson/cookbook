@@ -46,4 +46,45 @@ const createUnitOfMeasure = asyncHandler(async (req, res) => {
   res.status(201).json(createdUnitOfMeasure);
 });
 
-export { getUnitOfMeasure, findByNameUnitOfMeasure, createUnitOfMeasure };
+// @desc    Update a unitOfMeasure
+// @route   PUT /api/unitOfMeasure/:id
+// @access  Private/Admin
+const updateUnitOfMeasure = asyncHandler(async (req, res) => {
+  const {
+    name,
+    abbreviation,
+    gallon,
+    liters,
+    milliliters,
+    pint,
+    quart,
+    cup,
+    fluidOz,
+    tablespoon,
+    teaspoon,
+  } = req.body;
+
+  const unitOfMeasure = await UnitOfMeasure.findById(req.params.id);
+
+  if (unitOfMeasure) {
+    unitOfMeasure.name = name;
+    unitOfMeasure.abbreviation = abbreviation;
+    unitOfMeasure.gallon = gallon;
+    unitOfMeasure.liters = liters;
+    unitOfMeasure.milliliters = milliliters;
+    unitOfMeasure.pint = pint;
+    unitOfMeasure.quart = quart;
+    unitOfMeasure.cup = cup;
+    unitOfMeasure.fluidOz = fluidOz;
+    unitOfMeasure.tablespoon = tablespoon;
+    unitOfMeasure.teaspoon = teaspoon;
+
+    const updateUnitOfMeasure = await unitOfMeasure.save();
+    res.json(updateUnitOfMeasure);
+  } else {
+    res.status(404);
+    throw new Error('Unit of Measure not found');
+  }
+});
+
+export { getUnitOfMeasure, findByNameUnitOfMeasure, createUnitOfMeasure, updateUnitOfMeasure };
