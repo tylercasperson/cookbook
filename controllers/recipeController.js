@@ -53,4 +53,29 @@ const createRecipe = asyncHandler(async (req, res) => {
   res.status(201).json(createdRecipe);
 });
 
-export { getRecipes, getOneRecipe, createRecipe };
+// @desc    Update a recipe
+// @route   PUT /api/recipe/:id
+// @access  Private/Admin
+const updateRecipe = asyncHandler(async (req, res) => {
+  const { name, description, category, ingredients, toolsNeededs, instructions, source } = req.body;
+
+  const recipe = await Recipe.findById(req.params.id);
+
+  if (recipe) {
+    recipe.name = name;
+    recipe.description = description;
+    recipe.category = category;
+    recipe.ingredients = ingredients;
+    recipe.toolsNeededs = toolsNeededs;
+    recipe.instructions = instructions;
+    recipe.source = source;
+
+    const updateRecipe = await recipe.save();
+    res.json(updateRecipe);
+  } else {
+    res.status(404);
+    throw new Error('Recipe not found');
+  }
+});
+
+export { getRecipes, getOneRecipe, createRecipe, updateRecipe };
