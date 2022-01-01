@@ -101,10 +101,26 @@ const updateUnitOfMeasure = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete a UnitOfMeasure
+// @route   DELETE /api/UnitOfMeasures/:id
+// @access  Private/Admin
+const deleteUnitOfMeasure = asyncHandler(async (req, res) => {
+  const unitOfMeasure = await UnitOfMeasure.findById(req.params.id);
+
+  if (unitOfMeasure) {
+    await unitOfMeasure.remove();
+    res.json({ message: 'Unit Of Measure removed.' });
+  } else {
+    res.status(404);
+    throw new Error('Unit Of Measure not found');
+  }
+});
+
 export {
   getUnitOfMeasure,
   getOneUnitOfMeasure,
   findByNameUnitOfMeasure,
   createUnitOfMeasure,
   updateUnitOfMeasure,
+  deleteUnitOfMeasure,
 };
