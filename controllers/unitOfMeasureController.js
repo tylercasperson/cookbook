@@ -24,6 +24,20 @@ const findByNameUnitOfMeasure = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Fetch one unitsOfMeasure
+// @route   GET /api/unitOfMeasure/:id
+// @access  Public
+const getOneUnitOfMeasure = asyncHandler(async (req, res) => {
+  const unitOfMeasure = await UnitOfMeasure.findOne({ id: req.params.id });
+
+  if (unitOfMeasure) {
+    res.json(unitOfMeasure);
+  } else {
+    res.status(404);
+    throw new Error('Unit of measure not found');
+  }
+});
+
 // @desc    Create a unitOfMeasure
 // @route   POST /api/unitOfMeasure
 // @access  Private/Admin
@@ -87,4 +101,10 @@ const updateUnitOfMeasure = asyncHandler(async (req, res) => {
   }
 });
 
-export { getUnitOfMeasure, findByNameUnitOfMeasure, createUnitOfMeasure, updateUnitOfMeasure };
+export {
+  getUnitOfMeasure,
+  getOneUnitOfMeasure,
+  findByNameUnitOfMeasure,
+  createUnitOfMeasure,
+  updateUnitOfMeasure,
+};
